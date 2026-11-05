@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- 한국어 웹 문서 선언 -->
+<html lang="ko">
+<head>
+  <!-- 문자 인코딩을 UTF-8로 지정하여 한글 깨짐 방지 -->
+  <meta charset="UTF-8">
+  <!-- 모바일 및 태블릿 등 모든 기기에서 최적의 비율로 보이도록 뷰포트 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 브라우저 상단 탭에 표시될 웹 애플리케이션 제목 -->
+  <title>실시간 공기 신호등</title>
+  <!-- 눈이 편안하고 가독성이 뛰어난 Pretendard 웹폰트 연결 -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <!-- 공기 신호등 디자인 스타일시트 연결 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 화면 전체 레이아웃을 감싸는 메인 컨테이너 -->
+  <div class="app-container">
+    <!-- 서비스 타이틀을 담은 헤더 영역 -->
+    <header class="app-header">
+      <!-- 공기 신호등 메인 타이틀 -->
+      <h1 class="app-title">🚦 실시간 공기 신호등</h1>
+      <!-- 부제목 설명 -->
+      <p class="app-description">우리 동네 대기 상태를 신호등 색상으로 한눈에 확인하세요</p>
+    </header>
+
+    <!-- 시·도 지역을 선택할 수 있는 드롭다운 영역 -->
+    <section class="control-bar">
+      <!-- 지역 선택 드롭다운 라벨 -->
+      <label for="sidoSelect" class="control-label">지역 선택</label>
+      <!-- 전국 및 17개 시·도 선택 셀렉트 박스 -->
+      <select id="sidoSelect" class="sido-select">
+        <option value="전국">전국</option>
+        <option value="서울" selected>서울</option>
+        <option value="부산">부산</option>
+        <option value="대구">대구</option>
+        <option value="인천">인천</option>
+        <option value="광주">광주</option>
+        <option value="대전">대전</option>
+        <option value="울산">울산</option>
+        <option value="세종">세종</option>
+        <option value="경기">경기</option>
+        <option value="강원">강원</option>
+        <option value="충북">충북</option>
+        <option value="충남">충남</option>
+        <option value="전북">전북</option>
+        <option value="전남">전남</option>
+        <option value="경북">경북</option>
+        <option value="경남">경남</option>
+        <option value="제주">제주</option>
+      </select>
+    </section>
+
+    <!-- 공기 신호등 메인 대형 상태 카드 섹션 -->
+    <section class="traffic-section">
+      <!-- 대표 상태 카드 (이모지, 상태텍스트, 평균수치, 마스크 안내문구 포함) -->
+      <div id="trafficCard" class="traffic-card grade-none">
+        <!-- 선택된 지역 이름 표시 헤더 -->
+        <div id="trafficRegion" class="traffic-region">서울 대기 상태</div>
+        
+        <!-- 이모지와 상태 글자(좋음/보통/나쁨/매우나쁨)를 아주 크게 보여주는 메인 영역 -->
+        <div class="traffic-status-display">
+          <!-- 등급별 이모지 (🔵🟢🟠🔴⚪) -->
+          <span id="trafficEmoji" class="traffic-emoji">⚪</span>
+          <!-- 등급 한글 텍스트 (좋음 / 보통 / 나쁨 / 매우나쁨) -->
+          <span id="trafficStatusText" class="traffic-status-text">확인 중</span>
+        </div>
+
+        <!-- 그 지역의 평균 미세먼지 수치 표시 영역 -->
+        <div class="traffic-number-wrap">
+          <span class="traffic-number-label">평균 미세먼지</span>
+          <span id="trafficAverageValue" class="traffic-number-value">-</span>
+          <span class="traffic-number-unit">㎍/㎥</span>
+        </div>
+
+        <!-- 나쁨 이상일 때 '외출 시 마스크를 챙기세요' 등 한 줄 안내 문구 표시 영역 -->
+        <div id="trafficNotice" class="traffic-notice">데이터를 불러오는 중입니다.</div>
+      </div>
+    </section>
+
+    <!-- 데이터를 불러오는 동안 표시되는 안내 문구 (불러오는 중...) -->
+    <div id="statusMessage" class="status-message">불러오는 중...</div>
+
+    <!-- 각 측정소별 카드가 은은한 등급 색상으로 표시되는 그리드 컨테이너 -->
+    <main id="stationGrid" class="station-grid">
+      <!-- 자바스크립트로 동적 측정소 카드가 추가되는 위치 -->
+    </main>
+  </div>
+
+  <!-- 비동기 데이터 통신 및 렌더링 로직 스크립트 연결 -->
+  <script src="script.js"></script>
+</body>
+</html>
